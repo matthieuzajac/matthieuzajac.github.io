@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://matthieuzajac.github.io',
-  base: '/matthieuzajac',
+  site: 'https://matthieu.zajac.fr',
+  base: '/',
 });
