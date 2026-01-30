@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allProjects = await getCollection('projects');
+const latestProject = allProjects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home | My Portfolio">
+  <section class="py-12 border-b border-slate-200">
+    <h1 class="text-5xl font-extrabold text-slate-900 mb-4">I'm [Your Name].</h1>
+    <p class="text-xl text-slate-600 leading-relaxed max-w-2xl">
+      A developer focused on building clean, high-performance web applications. 
+      I specialize in Astro, React, and solving complex problems with simple code.
+    </p>
+    <div class="mt-8 flex gap-4">
+      <a href="/cv" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Download CV</a>
+      <a href="/projects" class="border border-slate-300 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition">View All Projects</a>
+    </div>
+  </section>
+
+  {latestProject && (
+    <section class="py-12">
+      <h2 class="text-sm font-bold uppercase tracking-widest text-blue-600 mb-6">Latest Work</h2>
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-slate-100">
+        <img src={latestProject.data.image} alt="" class="md:w-1/2 object-cover h-64 md:h-auto" />
+        <div class="p-8 flex flex-col justify-center">
+          <h3 class="text-2xl font-bold mb-3">{latestProject.data.title}</h3>
+          <p class="text-slate-600 mb-6">{latestProject.data.description}</p>
+          <a href={`/projects/${latestProject.slug}`} class="text-blue-600 font-bold hover:underline">
+            View Case Study &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
 </Layout>
