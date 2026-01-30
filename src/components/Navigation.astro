@@ -1,9 +1,8 @@
 ---
-// You can add logic here if you want to highlight the "active" link
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="bg-slate-900 text-white py-4 px-6 flex justify-between items-center sticky top-0 z-50 shadow-md">
+<nav class="bg-slate-900 text-white py-4 px-6 flex justify-between items-center sticky top-0 z-50 shadow-md no-print">
   <div class="text-xl font-bold tracking-tight">
     <a href="/" class="hover:text-blue-400 transition">PORTFOLIO</a>
   </div>
@@ -14,6 +13,9 @@ const currentPath = Astro.url.pathname;
     </li>
     <li>
       <a href="/projects" class={currentPath.includes("/projects") ? "text-blue-400" : "hover:text-blue-400 transition"}>Projects</a>
+    </li>
+    <li>
+      <a href="/extracurricular" class={currentPath.includes("/extracurricular") ? "text-blue-400" : "hover:text-blue-400 transition"}>Activities</a>
     </li>
     <li>
       <a href="/cv" class={currentPath === "/cv" ? "text-blue-400" : "hover:text-blue-400 transition"}>CV</a>

@@ -1,13 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import workExperience from '../data/experience.json';
 
-// Fetch projects and sort them by date (latest first)
-const allProjects = await getCollection('projects');
-const sortedProjects = allProjects.sort((a, b) => 
-  b.data.date.valueOf() - a.data.date.valueOf()
-);
+// JSON Imports
+import workExperience from '../data/experience.json';
+import education from '../data/education.json';
+import certifications from '../data/certifications.json';
+
+// Content Collection Imports
+const projects = await getCollection('projects');
+const extracurriculars = await getCollection('extracurriculars');
+
+// Sort both by date
+const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedExtras = extracurriculars.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Layout title="CV | My Portfolio">
@@ -15,119 +21,90 @@ const sortedProjects = allProjects.sort((a, b) =>
     
     <header class="border-b pb-8 flex justify-between items-end">
       <div>
-        <h1 class="text-4xl font-bold text-slate-900">Curriculum Vitae</h1>
-        <p class="text-slate-500">Software Developer</p>
+        <h1 class="text-4xl font-bold text-slate-900 tracking-tight">Curriculum Vitae</h1>
+        <p class="text-slate-500 font-medium">Software Developer & Innovator</p>
       </div>
-      <div class="no-print">
-        <button 
-          onclick="window.print()" 
-          class="flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition font-medium shadow-sm"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-          </svg>
-          Print to PDF
-        </button>
-      </div>
+      <button onclick="window.print()" class="no-print bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition flex items-center gap-2 text-sm font-bold shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Save as PDF
+      </button>
     </header>
 
     <section>
-      <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
-        <span class="w-8 h-1 bg-blue-600 mr-3"></span> Work Experience
+      <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+        <span class="w-8 h-1 bg-blue-600 rounded"></span> Work Experience
       </h2>
       <div class="space-y-8 border-l-2 border-slate-100 ml-3 pl-6">
         {workExperience.map(job => (
           <div class="relative">
-            <div class="absolute -left-[31px] top-2 w-4 h-4 rounded-full bg-white border-2 border-blue-600"></div>
-            <h3 class="text-xl font-bold text-slate-900">{job.role}</h3>
-            <a href={job.link} target="_blank" rel="noopener noreferrer" 
-               class="text-blue-600 font-medium hover:underline inline-flex items-center gap-1">
-              {job.company} 
+            <div class="absolute -left-[31px] top-2 w-4 h-4 rounded-full bg-white border-2 border-blue-600 shadow-sm"></div>
+            <h3 class="text-xl font-bold text-slate-900 leading-none">{job.role}</h3>
+            <a href={job.link} target="_blank" class="text-blue-600 font-semibold hover:underline text-sm inline-block mt-1">
+              {job.company} &nearrow;
             </a>
-            <p class="text-sm text-slate-400 mb-2">{job.period}</p>
-            <p class="text-slate-600 leading-relaxed">{job.description}</p>
+            <p class="text-xs text-slate-400 font-mono mt-1">{job.period}</p>
+            <p class="text-slate-600 mt-2 text-sm leading-relaxed">{job.description}</p>
           </div>
         ))}
       </div>
     </section>
 
     <section>
-      <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
-        <span class="w-8 h-1 bg-blue-600 mr-3"></span> Projects
+      <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+        <span class="w-8 h-1 bg-blue-600 rounded"></span> Featured Projects
       </h2>
-      <div class="grid gap-4">
+      <div class="grid gap-3">
         {sortedProjects.map(project => (
-          <div class="p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition">
-            <div class="flex justify-between items-start">
-              <h3 class="font-bold text-slate-900">{project.data.title}</h3>
-              <a href={`/projects/${project.slug}`} class="text-xs text-blue-600 font-bold uppercase tracking-wider hover:underline no-print">
-                View Details &rarr;
-              </a>
+          <div class="p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors">
+            <div class="flex justify-between items-center">
+              <h3 class="font-bold text-slate-800">{project.data.title}</h3>
+              <a href={`/projects/${project.slug}`} class="text-[10px] font-black uppercase text-blue-600 no-print">View Case Study</a>
             </div>
-            <p class="text-sm text-slate-600 mt-1">{project.data.description}</p>
+            <p class="text-sm text-slate-500 line-clamp-1">{project.data.description}</p>
           </div>
         ))}
       </div>
     </section>
 
-    <div class="grid md:grid-cols-2 gap-12">
+    <div class="grid md:grid-cols-2 gap-12 border-t pt-10">
       <section>
-        <h2 class="text-xl font-bold text-slate-800 mb-4">Education</h2>
+        <h2 class="text-xl font-bold text-slate-800 mb-4 italic">Education</h2>
         <div class="space-y-4">
-          <div>
-            <h4 class="font-bold">B.Sc. Computer Science</h4>
-            <p class="text-sm text-slate-500">University of Technology • 2016 - 2020</p>
-          </div>
+          {education.map(edu => (
+            <div>
+              <h4 class="font-bold text-slate-900">{edu.degree}</h4>
+              <p class="text-sm text-slate-500">{edu.school} | {edu.period}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       <section>
-        <h2 class="text-xl font-bold text-slate-800 mb-4">Certifications</h2>
-        <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm">
-          <li>AWS Certified Developer</li>
-          <li>Google UX Design Professional</li>
+        <h2 class="text-xl font-bold text-slate-800 mb-4 italic">Certifications</h2>
+        <ul class="space-y-2">
+          {certifications.map(cert => (
+            <li class="text-sm text-slate-600 flex items-center gap-2">
+              <span class="text-blue-500">✓</span> {cert}
+            </li>
+          ))}
         </ul>
       </section>
     </div>
 
-    <section class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-      <h2 class="text-xl font-bold text-slate-800 mb-4">Extracurriculars</h2>
+    <section class="bg-slate-900 p-8 rounded-3xl text-white shadow-xl">
+      <h2 class="text-xl font-bold mb-6">Extracurricular Activities</h2>
       <div class="grid sm:grid-cols-2 gap-4">
-        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
-          <h4 class="font-bold text-sm">Hackathon 2023</h4>
-          <p class="text-xs text-slate-500">1st Place - Best Innovation</p>
-        </div>
-        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
-          <h4 class="font-bold text-sm">Open Source Contributor</h4>
-          <p class="text-xs text-slate-500">Astro Community</p>
-        </div>
+        {sortedExtras.map(extra => (
+          <div class="p-4 bg-slate-800 rounded-xl border border-slate-700">
+            <h4 class="font-bold text-sm text-blue-400">{extra.data.title}</h4>
+            <p class="text-xs text-slate-400 mt-1">{extra.data.award}</p>
+            <a href={`/extracurricular/${extra.slug}`} class="text-[10px] font-bold mt-3 inline-block hover:text-white transition no-print">
+              READ FULL STORY &rarr;
+            </a>
+          </div>
+        ))}
       </div>
     </section>
 
-    <footer class="text-center pt-8 no-print">
-      <p class="text-slate-500 italic">
-        Looking for the digital gallery? 
-        <a href="/projects" class="text-blue-600 font-bold not-italic hover:underline">View all projects &rarr;</a>
-      </p>
-    </footer>
-
   </div>
 </Layout>
-
-<style>
-  @media print {
-    .no-print, nav, footer {
-      display: none !important;
-    }
-    body {
-      background-color: white !important;
-      font-size: 12pt;
-    }
-    .rounded-2xl {
-      border-radius: 0.5rem !important;
-    }
-    section {
-      page-break-inside: avoid;
-    }
-  }
-</style>

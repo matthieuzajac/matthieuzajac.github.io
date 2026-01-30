@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allExtras = await getCollection('extracurriculars');
+const sortedExtras = allExtras.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Extracurricular Activities">
+  <main class="py-10">
+    <h1 class="text-4xl font-bold mb-4">Extracurricular Activities</h1>
+    <p class="text-slate-600 mb-10 text-lg">Competitions, hackathons, and community contributions.</p>
+    
+    <div class="grid gap-6">
+      {sortedExtras.map(extra => (
+        <a href={`/extracurricular/${extra.slug}`} class="group">
+          <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm group-hover:border-blue-400 group-hover:shadow-md transition-all">
+            <div class="flex justify-between items-start">
+              <div>
+                <h2 class="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition">
+                  {extra.data.title}
+                </h2>
+                <p class="text-slate-500 text-sm mt-1">
+                   {extra.data.date.getFullYear()}
+                </p>
+              </div>
+              {extra.data.award && (
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                  {extra.data.award}
+                </span>
+              )}
+            </div>
+            <p class="text-slate-600 mt-4 line-clamp-2 italic">
+              Click to read the full story...
+            </p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
