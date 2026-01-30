@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Fetch all entries from the 'projects' collection
+const allProjects = await getCollection('projects');
+
+// 2. (Optional) Sort them by date if you have a date field
+const sortedProjects = allProjects.sort((a, b) => 
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="My Projects">
+  <main>
+    <h1>Project Portfolio</h1>
+    <p>A collection of my recent work and technical experiments.</p>
+
+    <div class="project-grid">
+      {sortedProjects.map(project => (
+        <article class="project-card">
+          <img src={project.data.image} alt={project.data.title} />
+          <div class="content">
+            <h3>{project.data.title}</h3>
+            <p>{project.data.description}</p>
+            <a href={`/projects/${project.slug}`}>Read More &rarr;</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .project-card {
+    border: 1px solid #444;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .content {
+    padding: 1.5rem;
+  }
+</style>
