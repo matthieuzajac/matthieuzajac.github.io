@@ -2,18 +2,34 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
+// 1. Generate a new path for every entry in the 'projects' collection
 export async function getStaticPaths() {
   const projectEntries = await getCollection('projects');
   return projectEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+    params: { slug: entry.slug }, 
+    props: { entry },
   }));
 }
 
+// 2. Get the specific project data from the props
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
 <Layout title={entry.data.title}>
-  <h1>{entry.data.title}</h1>
-  <img src={entry.data.image} alt={entry.data.title} />
-  <Content /> </Layout>
+  <article class="prose lg:prose-xl mx-auto py-10">
+    <header class="mb-8">
+      <h1 class="text-4xl font-extrabold mb-4">{entry.data.title}</h1>
+      <p class="text-slate-500 italic text-xl">{entry.data.description}</p>
+      <img 
+        src={entry.data.image} 
+        alt={entry.data.title} 
+        class="w-full h-96 object-cover rounded-2xl mt-8 shadow-lg"
+      />
+    </header>
+    
+    <div class="mt-10 text-slate-700 leading-relaxed">
+      <Content />
+    </div>
+  </article>
+</Layout>
