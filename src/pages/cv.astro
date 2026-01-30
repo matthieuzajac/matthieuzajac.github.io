@@ -1,13 +1,34 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import workExperience from '../data/experience.json';
+
+// Fetch projects and sort them by date (latest first)
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => 
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
 <Layout title="CV | My Portfolio">
   <div class="max-w-3xl mx-auto space-y-12 py-10">
     
-    <header class="border-b pb-8">
-      <h1 class="text-4xl font-bold text-slate-900">Curriculum Vitae</h1>
+    <header class="border-b pb-8 flex justify-between items-end">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-900">Curriculum Vitae</h1>
+        <p class="text-slate-500">Software Developer</p>
+      </div>
+      <div class="no-print">
+        <button 
+          onclick="window.print()" 
+          class="flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition font-medium shadow-sm"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          Print to PDF
+        </button>
+      </div>
     </header>
 
     <section>
@@ -18,17 +39,32 @@ import workExperience from '../data/experience.json';
         {workExperience.map(job => (
           <div class="relative">
             <div class="absolute -left-[31px] top-2 w-4 h-4 rounded-full bg-white border-2 border-blue-600"></div>
-            
             <h3 class="text-xl font-bold text-slate-900">{job.role}</h3>
-            <a href={job.company} target="_blank" rel="noopener noreferrer" 
+            <a href={job.link} target="_blank" rel="noopener noreferrer" 
                class="text-blue-600 font-medium hover:underline inline-flex items-center gap-1">
               {job.company} 
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="box-arrow-up-right" />
-              </svg>
             </a>
             <p class="text-sm text-slate-400 mb-2">{job.period}</p>
             <p class="text-slate-600 leading-relaxed">{job.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+        <span class="w-8 h-1 bg-blue-600 mr-3"></span> Projects
+      </h2>
+      <div class="grid gap-4">
+        {sortedProjects.map(project => (
+          <div class="p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition">
+            <div class="flex justify-between items-start">
+              <h3 class="font-bold text-slate-900">{project.data.title}</h3>
+              <a href={`/projects/${project.slug}`} class="text-xs text-blue-600 font-bold uppercase tracking-wider hover:underline no-print">
+                View Details &rarr;
+              </a>
+            </div>
+            <p class="text-sm text-slate-600 mt-1">{project.data.description}</p>
           </div>
         ))}
       </div>
@@ -47,7 +83,7 @@ import workExperience from '../data/experience.json';
 
       <section>
         <h2 class="text-xl font-bold text-slate-800 mb-4">Certifications</h2>
-        <ul class="list-disc list-inside text-slate-600 space-y-2">
+        <ul class="list-disc list-inside text-slate-600 space-y-2 text-sm">
           <li>AWS Certified Developer</li>
           <li>Google UX Design Professional</li>
         </ul>
@@ -57,54 +93,41 @@ import workExperience from '../data/experience.json';
     <section class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
       <h2 class="text-xl font-bold text-slate-800 mb-4">Extracurriculars</h2>
       <div class="grid sm:grid-cols-2 gap-4">
-        <div class="p-4 bg-white rounded-lg shadow-sm">
-          <h4 class="font-bold">Hackathon 2023</h4>
-          <p class="text-sm text-slate-500">1st Place - Best Innovation</p>
+        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
+          <h4 class="font-bold text-sm">Hackathon 2023</h4>
+          <p class="text-xs text-slate-500">1st Place - Best Innovation</p>
         </div>
-        <div class="p-4 bg-white rounded-lg shadow-sm">
-          <h4 class="font-bold">Open Source Contributor</h4>
-          <p class="text-sm text-slate-500">Active member of the Astro community</p>
+        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
+          <h4 class="font-bold text-sm">Open Source Contributor</h4>
+          <p class="text-xs text-slate-500">Astro Community</p>
         </div>
       </div>
     </section>
 
-    <footer class="text-center pt-8">
-      <p class="text-slate-500 italic">Want to see the code? 
-        <a href="/projects" class="text-blue-600 font-bold not-italic hover:underline">View my project gallery &rarr;</a>
+    <footer class="text-center pt-8 no-print">
+      <p class="text-slate-500 italic">
+        Looking for the digital gallery? 
+        <a href="/projects" class="text-blue-600 font-bold not-italic hover:underline">View all projects &rarr;</a>
       </p>
     </footer>
-
-    <div class="flex justify-end no-print">
-      <button 
-        onclick="window.print()" 
-        class="flex items-center gap-2 bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition font-medium shadow-sm"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-        </svg>
-        Download PDF / Print
-      </button>
-    </div>
 
   </div>
 </Layout>
 
 <style>
-  /* This ensures the Nav and Button don't show up on the PDF */
   @media print {
     .no-print, nav, footer {
       display: none !important;
     }
-    
     body {
       background-color: white !important;
-      color: black !important;
+      font-size: 12pt;
     }
-
-    /* Adjust margins for the printed paper */
-    main {
-      margin: 0 !important;
-      padding: 0 !important;
+    .rounded-2xl {
+      border-radius: 0.5rem !important;
+    }
+    section {
+      page-break-inside: avoid;
     }
   }
 </style>
