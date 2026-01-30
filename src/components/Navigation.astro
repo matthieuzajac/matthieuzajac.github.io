@@ -9,22 +9,22 @@ const navItems = [
 ];
 ---
 
-<nav class="bg-slate-900 text-white py-4 px-6 no-print w-full sticky top-0 z-50 shadow-md">
-  <div class="max-w-4xl mx-auto flex justify-between items-center">
+<nav class="bg-slate-900 text-white w-full sticky top-0 z-50 shadow-md no-print">
+  <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
     
     <div class="text-xl font-bold tracking-tight">
       <a href="/" class="hover:text-blue-400 transition">PORTFOLIO</a>
     </div>
     
-    <ul class="flex gap-6 md:gap-8 font-medium">
+    <ul class="flex gap-6 font-medium">
       {navItems.map(item => (
         <li>
           <a 
             href={item.href} 
             class={
-              (item.href === '/' ? currentPath === '/' : currentPath.includes(item.href)) 
-              ? "text-blue-400 font-bold" 
-              : "hover:text-blue-400 transition text-slate-300"
+              (item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href)) 
+              ? "text-blue-400 font-bold border-b-2 border-blue-400" 
+              : "text-slate-300 hover:text-white transition"
             }
           >
             {item.name}
