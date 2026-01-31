@@ -1,7 +1,7 @@
 ---
 title: "Treasurer & Event Organizer - AREM"
 description: "Financial management and strategic partnership negotiation for the Mines Robotics Association."
-image: "/images/arem-robotics.jpg"
+image: "/images/arem.webp"
 date: 2025
 tags: ["Finance", "Negotiation", "Robotics", "Event Planning"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Logistics Manager - Mines Gala"
 description: "Coordinating high-stakes logistics for a 200+ person formal event."
-image: "/images/gala-logistics.jpg"
+image: "/images/gala.webp"
 date: 2025
 tags: ["Logistics", "Strategy", "Operations", "Event Management"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Multi-Instrumentalist & Performer"
 description: "Contributing to the cultural life of the school through live musical performances."
-image: "/images/music.jpg"
+image: "/images/music.webp"
 date: 2025
 tags: ["Violin", "Guitar", "Bass", "Vocals"]
 ---

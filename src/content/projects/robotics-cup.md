@@ -1,7 +1,7 @@
 ---
 title: "Autonomous Robotics: The Show Must Go On"
 description: "Embedded software development and emergency system recovery for a multi-robot squad at the 2025 French Robotics Cup."
-image: "/images/robotics_cup.webp"
+image: "/images/cdr.webp"
 date: 2025
 tags: ["C++", "Raspberry Pi", "STM32", "Lidar", "Embedded Systems"]
 ---
