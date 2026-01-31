@@ -3,7 +3,6 @@ title: "Multi-Instrumentalist & Performer"
 description: "Contributing to the cultural life of the school through live musical performances."
 image: "/images/music.jpg"
 date: 2025
-award: "Cultural Engagement"
 tags: ["Violin", "Guitar", "Bass", "Vocals"]
 ---
 
