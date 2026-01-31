@@ -1,7 +1,7 @@
 ---
 title: "LoRaWAN IoT Monitoring System"
 description: "An autonomous environmental sensing node for 3D printing filament storage using TTN and Datacake."
-image: "/images/lora.jpg"
+image: "/images/lora.webp"
 date: 2026
 tags: ["LoRaWAN", "STM32", "BME680", "TTN", "Datacake", "Low Power"]
 ---

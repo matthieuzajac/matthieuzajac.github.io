@@ -1,7 +1,7 @@
 ---
 title: "Capacitive Drum Prototype"
 description: "A mixed-signal engineering project combining physical simulations, custom PCB design, and embedded signal processing."
-image: "/images/Assemblage.png"
+image: "/images/Assemblage.webp"
 date: 2025
 tags: ["STM32", "COMSOL", "KiCad/PCB", "Signal Processing", "C++"]
 ---

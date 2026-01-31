@@ -1,7 +1,7 @@
 ---
 title: "Ascon Cipher RTL Implementation"
 description: "Hardware implementation of the Ascon-AEAD128 encryption algorithm following standard industry verification cycles."
-image: "/images/aead.png"
+image: "/images/aead.webp"
 date: 2024
 tags: ["SystemVerilog", "RTL Design", "Cryptography", "Modelsim"]
 ---

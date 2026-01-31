@@ -1,7 +1,7 @@
 ---
 title: "Multi-Modal Ball Positioning System"
 description: "A hybrid tracking system combining UWB trilateration, mechanical modeling, and computer vision for impartial sports officiating."
-image: "/images/Position.jpg"
+image: "/images/Position.webp"
 date: 2023
 tags: ["UWB", "Python", "OpenCV", "Arduino", "Signal Processing", "Mechanics"]
 ---
