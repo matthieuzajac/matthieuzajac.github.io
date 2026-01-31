@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+/* Global styles for Markdown content */
+@theme {
+  /* You can define custom colors here if needed */
+}
+
+/* This targets the 'prose' class we added to your [slug].astro files */
+.prose {
+  /* Standard paragraph and base text styling */
+  h1 {
+    @apply text-4xl font-black mb-8 mt-4 text-slate-900 tracking-tight;
+  }
+  h2 {
+    @apply text-2xl font-bold mb-4 mt-12 text-slate-800 tracking-tight border-b border-slate-100 pb-2;
+  }
+  h3 {
+    @apply text-xl font-bold mb-3 mt-8 text-slate-800;
+  }
+  p {
+    @apply mb-6 leading-relaxed text-slate-600 text-lg;
+  }
+  ul {
+    @apply list-disc pl-6 mb-6 space-y-2 text-slate-600;
+  }
+  li::marker {
+    @apply text-blue-500 font-bold;
+  }
+  strong {
+    @apply text-slate-900 font-bold;
+  }
+  a {
+    @apply text-blue-600 underline underline-offset-4 hover:text-blue-800 transition-colors;
+  }
+  img {
+    @apply rounded-2xl shadow-lg my-10;
+  }
+}
+
+.prose > :first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}

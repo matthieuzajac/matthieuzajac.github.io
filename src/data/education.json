@@ -1,8 +1,24 @@
 [
   {
-    "degree": "B.Sc. Computer Science",
-    "school": "University of Technology",
-    "period": "2016 - 2020",
-    "description": "Specialized in Software Engineering and Data Structures."
+    "degree": "Msc Computer Science",
+    "school": "Nationnal Taiwan University",
+    "period": "2026 - 2027",
+    "description": "Specialized in Artificial Intelligence, Machine Learning and Computer Architecture, completing advanced coursework and research projects in these fields.",
+    "skills": ["Machine Learning", "AI", "Computer Architecture", "Data Science", "Research"]
+  },
+  {
+    "degree": "Msc Microelectronic Systems Engineering and Computer Science",
+    "school": "Mines Saint-Étienne",
+    "period": "2024 - 2027",
+    "description": "Focused on embedded systems, VLSI design, and computer architecture, gaining hands-on experience through projects and internships.",
+    "skills": ["FPGA", "Silicon devices design", "Digital / Analog electronics", "IoT", "Computer Architecture",
+"Logic design", "Software development", "Embedded systems", "Scripting", "RTL Design", "Machine learning"]
+  },
+  {
+    "degree": "Preparatory School for Engineering Studies (MPSI - PSI)",
+    "school": "Pôle Joliot-Curie Chateaubriand ",
+    "period": "2022 - 2024",
+    "description": "Intensive curriculum covering advanced mathematics, physics, and engineering principles to prepare for entrance into top engineering schools in France.",
+    "skills": ["Advanced Mathematics", "Physics", "Engineering Principles", "Problem Solving", "Critical Thinking"]
   }
 ]

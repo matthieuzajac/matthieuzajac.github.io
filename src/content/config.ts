@@ -6,7 +6,8 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     image: z.string(),
-    date: z.date(),
+    date: z.number(),
+    tags: z.array(z.string()).default([]),
   }),
 });
 
@@ -14,8 +15,11 @@ const extracurriculars = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    award: z.string().optional(),
-    date: z.date(),
+    description: z.string().optional(),
+    image: z.string().optional(),
+    date: z.number(),
+    award: z.string().optional(), 
+    tags: z.array(z.string()).default([]),
   }),
 });
 

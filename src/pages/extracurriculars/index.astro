@@ -6,34 +6,68 @@ const allExtras = await getCollection('extracurriculars');
 const sortedExtras = allExtras.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Extracurricular Activities">
-  <main class="py-10">
-    <h1 class="text-4xl font-bold mb-4">Extracurricular Activities</h1>
-    <p class="text-slate-600 mb-10 text-lg">Competitions, hackathons, and community contributions.</p>
-    
-    <div class="grid gap-6">
+<Layout title="Activities | Beyond Engineering">
+  <main class="max-w-6xl mx-auto px-6 py-16">
+    <header class="mb-16 border-l-4 border-slate-900 pl-6">
+      <h1 class="text-5xl font-black text-slate-900 tracking-tight mb-4">Beyond Engineering</h1>
+      <p class="text-xl text-slate-600 max-w-2xl leading-relaxed">
+        A record of my <span class="text-blue-600 font-semibold">leadership</span>, 
+        student engagement, and creative pursuits across projects and associations.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {sortedExtras.map(extra => (
-        <a href={`/extracurricular/${extra.slug}`} class="group">
-          <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm group-hover:border-blue-400 group-hover:shadow-md transition-all">
-            <div class="flex justify-between items-start">
-              <div>
-                <h2 class="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition">
+        <a href={`/extracurriculars/${extra.slug}`} class="group">
+          <article class="h-full flex flex-col bg-white border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-100/50 hover:-translate-y-2">
+            
+            {extra.data.image && (
+              <div class="relative h-48 overflow-hidden">
+                <img 
+                  src={extra.data.image} 
+                  alt={extra.data.title} 
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                />
+                <div class="absolute top-4 left-4">
+                  <span class="text-[10px] font-black uppercase tracking-widest bg-slate-900/80 backdrop-blur-md text-white px-3 py-1.5 rounded-full">
+                    {extra.data.date}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div class="p-8 flex-grow flex flex-col">
+              <div class="mb-4">
+                 {extra.data.award && (
+                  <span class="text-[10px] font-bold uppercase tracking-[0.15em] text-blue-600 mb-2 block">
+                    {extra.data.award}
+                  </span>
+                )}
+                <h2 class="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   {extra.data.title}
                 </h2>
-                <p class="text-slate-500 text-sm mt-1">
-                   {extra.data.date.getFullYear()}
-                </p>
               </div>
-              {extra.data.award && (
-                <span class="text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                  {extra.data.award}
-                </span>
+
+              <p class="text-slate-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                {extra.data.description}
+              </p>
+
+              {extra.data.tags && (
+                <div class="flex flex-wrap gap-2 mt-auto">
+                  {extra.data.tags.map((tag) => (
+                    <span class="text-[9px] font-black uppercase tracking-wider bg-slate-50 text-slate-500 px-2 py-1 rounded border border-slate-100">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               )}
             </div>
-            <p class="text-slate-600 mt-4 line-clamp-2 italic">
-              Click to read the full story...
-            </p>
-          </div>
+
+            <div class="px-8 py-5 bg-slate-50 border-t border-slate-100 flex justify-between items-center group-hover:bg-blue-50 transition-colors">
+              <span class="text-xs font-bold text-slate-400 group-hover:text-blue-600 transition-colors">View Project Details</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-slate-300 group-hover:text-blue-600 group-hover:translate-x-1 transition-all"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </div>
+          </article>
         </a>
       ))}
     </div>

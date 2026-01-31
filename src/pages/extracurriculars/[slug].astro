@@ -15,29 +15,125 @@ const { Content } = await entry.render();
 ---
 
 <Layout title={`${entry.data.title} | Activities`}>
-  <article class="max-w-3xl mx-auto py-10">
-    <header class="mb-8 border-b pb-8">
-      <div class="flex justify-between items-center mb-4">
-        <h1 class="text-4xl font-extrabold text-slate-900">{entry.data.title}</h1>
+  <article class="max-w-4xl mx-auto px-6 py-12">
+    <nav class="mb-12 no-print">
+      <a href="/extracurricular" class="group flex items-center text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+        All Activities
+      </a>
+    </nav>
+
+    <header class="mb-16">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="bg-emerald-50 text-emerald-700 border border-emerald-100 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+          Activity {entry.data.date}
+        </span>
+        
         {entry.data.award && (
-          <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-bold">
-            {entry.data.award}
+          <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-black flex items-center shadow-sm">
+            <span class="mr-1">🏆</span> {entry.data.award}
           </span>
         )}
       </div>
-      <p class="text-slate-500 font-medium">
-        {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
-      </p>
+
+      <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-8">
+        {entry.data.title}
+      </h1>
+
+      {entry.data.image && (
+        <div class="relative group mb-12">
+          <div class="absolute inset-0 bg-emerald-500 rounded-3xl blur-2xl opacity-10 group-hover:opacity-20 transition-opacity"></div>
+          
+          <button id="open-modal" class="w-full cursor-zoom-in">
+            <img 
+              src={entry.data.image} 
+              alt={entry.data.title} 
+              class="relative w-full h-[25rem] object-cover rounded-3xl shadow-xl border border-slate-100 transition-transform duration-300 group-hover:scale-[1.01]"
+            />
+            <span class="absolute bottom-4 right-4 bg-black/50 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+              Click to expand
+            </span>
+          </button>
+
+          <dialog id="image-modal" class="p-0 rounded-3xl backdrop:backdrop-blur-xl backdrop:bg-slate-900/80 border-none bg-transparent max-w-[90vw] max-h-[90vh] outline-none">
+            <form method="dialog">
+              <button class="fixed top-6 right-6 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <img 
+                src={entry.data.image} 
+                alt={entry.data.title} 
+                class="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+              />
+            </form>
+          </dialog>
+        </div>
+      )}
+
+      {entry.data.description && (
+        <p class="text-2xl text-slate-500 font-light leading-relaxed max-w-3xl">
+          {entry.data.description}
+        </p>
+      )}
     </header>
-    
-    <div class="prose prose-slate lg:prose-xl max-w-none">
-      <Content />
-    </div>
-    
-    <div class="mt-12 pt-8 border-t no-print">
-      <a href="/extracurricular" class="text-blue-600 font-bold hover:underline">
-        &larr; Back to all activities
-      </a>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-8">
+        <div class="prose prose-slate prose-lg max-w-none 
+                    prose-headings:text-slate-900 prose-headings:font-bold
+                    prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50/50 prose-blockquote:py-1 prose-blockquote:rounded-r-lg
+                    prose-li:marker:text-emerald-500">
+          <Content />
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4">
+        <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 sticky top-8">
+          <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Involvement Tags</h3>
+          <div class="flex flex-wrap gap-2 mb-8">
+            {entry.data.tags.map(tag => (
+              <span class="px-3 py-1 bg-white border border-slate-200 text-slate-600 rounded-lg text-sm font-medium hover:border-emerald-300 hover:text-emerald-600 transition-all">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center text-sm text-slate-500">
+              <svg class="h-4 w-4 mr-2 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Academic Year: {entry.data.date}
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
   </article>
 </Layout>
+
+<script>
+  const modal = document.getElementById('image-modal') as HTMLDialogElement;
+  const openBtn = document.getElementById('open-modal');
+
+  openBtn?.addEventListener('click', () => {
+    modal?.showModal();
+  });
+
+  // Close modal when clicking the backdrop
+  modal?.addEventListener('click', (e) => {
+    const dialogDimensions = modal.getBoundingClientRect();
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      modal.close();
+    }
+  });
+</script>

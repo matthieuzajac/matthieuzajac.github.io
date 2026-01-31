@@ -1,16 +1,27 @@
 [
   {
-    "company": "Tech Solutions Inc.",
-    "link": "https://google.com",
-    "role": "Full Stack Developer",
-    "period": "2022 - Present",
-    "description": "Led the development of a high-traffic e-commerce platform using Astro and React."
+    "company": "Arturia",
+    "link": "https://www.arturia.com",
+    "role": "Firmware Engineer Intern",
+    "period": "April 2026 - August 2026",
+    "description": "Developed and tested embedded firmware for soundcards hardware, adding new features and optimizing performance.",
+    "stack" : ["C++", "C", "Git", "FPGA", "Embedded Systems", "System Verilog"]
   },
   {
-    "company": "Creative Agency",
-    "link": "https://example.com",
-    "role": "Junior Web Designer",
-    "period": "2020 - 2022",
-    "description": "Designed and implemented responsive UI components for various client projects."
+    "company": "Orange",
+    "link": "https://www.orange.fr/portail",
+    "role": "Cybersecurity Research Intern",
+    "period": "January 2025 - January 2025",
+    "description": "Developed a Python framework based on a Docker cluster to recover compromised customer credentials, restoring 500+ accounts within the first month.",
+    "stack" : ["Python", "Docker", "API", "Cybersecurity", "Linux", "SQLite"]
+  },
+  {
+    "company": "Anonymal",
+    "link": "https://www.anonymal.tv/",
+    "role": "Arduino Workshop Volunteer ",
+    "period": "January 2025 - January 2025",
+    "description": "Volunteered at an Arduino workshop, teaching beginners how to build and program basic electronic circuits.",
+    "stack" : ["Arduino", "Electronics", "Circuit Design", "Teaching", "Mentoring"]
   }
+
 ]
