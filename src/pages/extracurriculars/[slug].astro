@@ -137,3 +137,19 @@ const { Content } = await entry.render();
     }
   });
 </script>
+
+<style>
+  /* This ensures the dialog is centered even if the browser has weird defaults */
+  #image-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  /* Prevent body scroll when modal is open */
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+</style>

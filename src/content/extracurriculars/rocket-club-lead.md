@@ -1,6 +1,6 @@
 ---
 title: "Rocket Club Lead (Project PERSEUS)"
-description: "Managing a team of 13 for the design and launch of an experimental rocket in collaboration with CNES."
+description: "Managing a team of 17 for the design and launch of an experimental rocket in collaboration with CNES."
 image: "/images/astreos.webp"
 date: 2025
 tags: ["Project Management", "Avionics", "CNES", "Leadership"]
