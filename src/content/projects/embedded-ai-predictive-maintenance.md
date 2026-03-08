@@ -1,5 +1,5 @@
 ---
-title: "Embedded AI — Predictive Maintenance on STM32"
+title: "Embedded AI, Predictive Maintenance on STM32"
 description: "End-to-end deployment of a deep neural network for predictive maintenance on an STM32L4R9 microcontroller using STM32Cube.AI."
 image: "/images/embedded-ai.webp"
 date: 2026
