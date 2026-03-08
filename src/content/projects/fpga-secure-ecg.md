@@ -8,7 +8,7 @@ tags: ["SystemVerilog", "FPGA", "UART", "Ascon", "Vivado", "ZYNQ", "FSM", "Digit
 
 ## Project Overview
 
-Designed and implemented a complete end-to-end secure data acquisition system on the **PYNQ-Z2** development board (Xilinx ZYNQ 7020 SoC). The system captures ECG signals from a bioelectronics shield, transmits the data over a **UART** serial link, and secures it in real time using the **ASCON lightweight cipher** — all implemented in hardware using SystemVerilog and the Vivado 2022.2 toolchain.
+Designed and implemented a complete end-to-end secure data acquisition system on the **PYNQ-Z2** development board (Xilinx ZYNQ 7020 SoC). The system captures ECG signals from a bioelectronics shield, transmits the data over a **UART** serial link, and secures it in real time using the **ASCON lightweight cipher**, all implemented in hardware using SystemVerilog and the Vivado 2022.2 toolchain.
 
 ## System Architecture
 
@@ -27,6 +27,4 @@ The pipeline integrates three independent subsystems synthesized on the FPGA fab
 
 ## Technical Challenges
 
-The main challenge was timing closure across the full pipeline: synchronizing the asynchronous UART stream with the block-oriented ASCON cipher required careful handshake logic and buffering. Managing the FPGA clock domains and ensuring bit-accurate ASCON encryption output — verified against software golden vectors — demanded rigorous testbench development before moving to on-board testing.
-
-> "Bridging hardware security with bioelectronics on a single FPGA taught me how real systems demand co-design thinking across every layer of the stack."
+The main challenge was timing closure across the full pipeline: synchronizing the asynchronous UART stream with the block-oriented ASCON cipher required careful handshake logic and buffering. Managing the FPGA clock domains and ensuring bit-accurate ASCON encryption output demanded rigorous testbench development before moving to on-board testing.

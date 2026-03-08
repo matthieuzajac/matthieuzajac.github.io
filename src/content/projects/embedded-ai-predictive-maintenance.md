@@ -8,7 +8,7 @@ tags: ["Embedded AI", "STM32", "TensorFlow", "STM32Cube.AI", "Python", "Machine 
 
 ## Project Overview
 
-Designed, trained, and deployed a **Deep Neural Network (DNN)** for predictive maintenance directly on an **STM32L4R9** microcontroller. The project covers the full embedded ML pipeline — from raw data preprocessing to live on-device inference — using the **AI4I 2020 Predictive Maintenance Dataset** and the **STM32Cube.AI** toolchain.
+Designed, trained, and deployed a **Deep Neural Network (DNN)** for predictive maintenance directly on an **STM32L4R9** microcontroller. The project covers the full embedded ML pipeline, from raw data preprocessing to live on-device inference, using the **AI4I 2020 Predictive Maintenance Dataset** and the **STM32Cube.AI** toolchain.
 
 ## Pipeline
 
@@ -23,10 +23,8 @@ Designed, trained, and deployed a **Deep Neural Network (DNN)** for predictive m
 * **Full Embedded ML Workflow:** Covers every stage from data science to microcontroller firmware, following industrial embedded AI practices.
 * **Resource Analysis:** Used STM32Cube.AI's profiler to evaluate the trade-off between model complexity and on-device memory constraints.
 * **Professional Git Workflow:** Developed collaboratively on GitLab with feature branches, incremental commits, and descriptive commit messages reflecting real project evolution.
-* **Bonus — MCUNet Exploration:** Investigated MCUNet as an alternative ultra-compact architecture for even tighter memory budgets.
+* **Bonus, MCUNet Exploration:** Investigated MCUNet as an alternative ultra-compact architecture for even tighter memory budgets.
 
 ## Technical Challenges
 
-Fitting a meaningful DNN within the strict RAM and Flash limits of a Cortex-M4 required iterative pruning and quantization analysis. Ensuring that classification latency remained acceptable for real-time predictive maintenance decisions — without an OS or runtime — demanded careful profiling at every step of the conversion process.
-
-> "Taking a model from a Colab notebook to bare-metal inference on a microcontroller showed me the full gap between ML research and production-grade embedded systems."
+Fitting a meaningful DNN within the strict RAM and Flash limits of a Cortex-M4 required iterative pruning and quantization analysis. Ensuring that classification latency remained acceptable for real-time predictive maintenance decisions, without an OS or runtime, demanded careful profiling at every step of the conversion process.
